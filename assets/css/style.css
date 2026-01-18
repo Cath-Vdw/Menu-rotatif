@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif !important;
+  background-color: black;
+  color: antiquewhite;
+  overflow-x: hidden;
+  /* Pas de scrollbar horizontale*/
+  margin: 0;
+}
+
+
+
+/* CONTENEUR GENERAL */
+
+.container {
+  background-color: maroon;
+  color: lightgray;
+  transform-origin: top left;
+  /* glisse depuis le haut gauche vers la droite */
+  transition: transform 0.5s linear;
+  /* transition plus douce lors de la rotation */
+  width: 100vw;
+  /* prend toute la place horizontalement */
+  min-height: 100vh;
+  /* hauteur minimale écran complet */
+  padding: 50px;
+}
+
+.container.show-nav {
+  transform: rotate(-20deg);
+  /* conteneur va basculer sur le côté quand il aura cette classe*/
+}
+
+
+
+/* CERCLE EN HAUT A GAUCHE */
+.circle-container {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+}
+
+.circle {
+  background-color: black;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  position: relative;
+  /* permet de positionner les icônes de manière absolue */
+  transition: transform 0.5s linear;
+  /* quand ça tourne */
+}
+
+.container.show-nav .circle {
+  transform: rotate(-70deg);
+  /* permet que le bouton de fermeture s'affiche dans le cercle au lieu de celui d'ouverture */
+}
+
+.circle button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 75px;
+  background-color: transparent;
+  border: 0;
+  font-size: 35px;
+  color: antiquewhite;
+}
+
+.circle button:focus {
+  outline: none;
+}
+
+/* Positionnement des boutons à l'intérieur du cercle */
+.circle button#open {
+  left: 55%;
+}
+
+.circle button#close {
+  top: 55%;
+  transform: rotate(90deg);
+  transform-origin: top left;
+}
+
+
+
+/* CONTENU PAGE */
+
+.content img {
+  max-width: 100%;
+  margin: 15px 0;
+  border: 2px grey solid;
+  border-radius: 8px;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
+.content h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: antiquewhite;
+  text-align: center;
+  text-shadow: 2px 2px gray;
+}
+
+.content p {
+  color: antiquewhite;
+  line-height: 1.5;
+}
+
+
+/* MENU DE NAVIGATION */
+
+nav {
+  /* Pour bien le positionner, mettre manuellement le container en show-nav */
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  z-index: 100;
+}
+
+nav ul {
+  list-style-type: none;
+  padding-left: 30px;
+}
+
+nav ul li {
+  text-transform: uppercase;
+  color: antiquewhite;
+  margin: 40px 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in;
+}
+
+nav ul li:nth-child(2) {
+  /* second element du menu */
+  margin-left: 15px;
+  transform: translateX(-150%);
+}
+
+nav ul li:nth-child(3) {
+  margin-left: 30px;
+  transform: translateX(-200%);
+}
+
+nav ul li:nth-child(4) {
+  margin-left: 45px;
+  transform: translateX(-250%);
+}
+
+nav ul li i {
+  /* icônes font awesome */
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+nav a {
+  color: #fafafa;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+nav a:hover {
+  color: black;
+  font-weight: bold;
+}
+
+/* rend le menu visible quand le conteneur a glissé sur le côté */
+.container.show-nav+nav li {
+  transform: translateX(0);
+  transition-delay: 0.4s;
+}
